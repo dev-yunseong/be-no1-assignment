@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.exception.CalculatorDividedByZeroException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class ArithmeticCalculator<T extends Number> {
         return num1.doubleValue() / num2.doubleValue();
     }
 
-    public double calculate(T num1, T num2, char operator) throws Exception {
+    public double calculate(T num1, T num2, char operator) throws CalculatorDividedByZeroException {
         double result = 0;
         switch (operator) {
             case '+':
@@ -47,7 +49,7 @@ public class ArithmeticCalculator<T extends Number> {
                 break;
             case '/':
                 if (num2.doubleValue() == 0)
-                    throw new Exception("divided by zero");
+                    throw new CalculatorDividedByZeroException("divided by zero");
                 result = div(num1, num2);
                 break;
         }

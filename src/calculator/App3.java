@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.exception.CalculatorDividedByZeroException;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -21,8 +23,8 @@ public class App3 {
 
                 double result = (double) calculator.getResults().getLast();
 
-                System.out.printf("result: %.02f\n", result);
-            } catch (Exception e) {
+                System.out.printf("result: %.2f\n", result);
+            } catch (CalculatorDividedByZeroException e) {
                 System.out.println("error : " + e.getMessage());
             }
 
