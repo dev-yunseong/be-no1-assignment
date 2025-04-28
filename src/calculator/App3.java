@@ -1,27 +1,27 @@
 package calculator;
 
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
-public class App {
-
-    public static void main(String[] args) {
+public class App3 {
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
-        Calculator calculator = new Calculator();
-        int num1, num2;
+        ArithmeticCalculator calculator = new ArithmeticCalculator<Double>();
+        double num1, num2;
         while (true){
             try {
                 System.out.print("num1: ");
-                num1 = scanner.nextInt();
+                num1 = scanner.nextDouble();
                 System.out.print("num2: ");
-                num2 = scanner.nextInt();
+                num2 = scanner.nextDouble();
 
                 System.out.print("operator: ");
                 char operator = scanner.next().charAt(0);
                 calculator.calculate(num1, num2, operator);
 
-                int result = calculator.getResults().getLast();
+                double result = (double) calculator.getResults().getLast();
 
-                System.out.printf("result: %d\n", result);
+                System.out.printf("result: %.02f\n", result);
             } catch (Exception e) {
                 System.out.println("error : " + e.getMessage());
             }
@@ -31,46 +31,16 @@ public class App {
             if (commend.equals("exit"))
                 break;
         }
-    }
 
-//    public static void main(String[] args) {
-//        Scanner scanner = new Scanner(System.in);
-//        int num1, num2;
-//        while (true){
-//            try {
-//                System.out.print("num1: ");
-//                num1 = scanner.nextInt();
-//                System.out.print("num2: ");
-//                num2 = scanner.nextInt();
-//
-//                System.out.print("operator: ");
-//                char operator = scanner.next().charAt(0);
-//                int result = -1;
-//                switch (operator) {
-//                    case '+':
-//                        result = num1 + num2;
-//                        break;
-//                    case '-':
-//                        result = num1 - num2;
-//                        break;
-//                    case '*':
-//                        result = num1 * num2;
-//                        break;
-//                    case '/':
-//                        if (num2 == 0)
-//                            throw new Exception("divided by zero");
-//                        result = num1 / num2;
-//                        break;
-//                }
-//                System.out.printf("result: %d\n", result);
-//            } catch (Exception e) {
-//                System.out.println("error : " + e.getMessage());
-//            }
-//
-//            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
-//            String commend = scanner.next();
-//            if (commend.equals("exit"))
-//                break;
-//        }
-//    }
+        System.out.print("num: ");
+        double num = scanner.nextDouble();
+
+        List<Double> nums = (List<Double>) calculator.getResults().stream()
+                .filter( x -> ((Number) x).doubleValue() > num)
+                .collect(Collectors.toList());
+
+        for (Double n : nums){
+            System.out.printf("result: %.02f, ", n);
+        }
+    }
 }
