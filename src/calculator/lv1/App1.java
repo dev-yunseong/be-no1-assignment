@@ -1,11 +1,10 @@
-package calculator;
+package calculator.lv1;
 
 import java.util.Scanner;
 
-public class App2 {
+public class App1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Calculator calculator = new Calculator();
         int num1, num2;
         while (true){
             try {
@@ -16,10 +15,23 @@ public class App2 {
 
                 System.out.print("operator: ");
                 char operator = scanner.next().charAt(0);
-                calculator.calculate(num1, num2, operator);
-
-                int result = calculator.getResults().getLast();
-
+                int result = -1;
+                switch (operator) {
+                    case '+':
+                        result = num1 + num2;
+                        break;
+                    case '-':
+                        result = num1 - num2;
+                        break;
+                    case '*':
+                        result = num1 * num2;
+                        break;
+                    case '/':
+                        if (num2 == 0)
+                            throw new Exception("divided by zero");
+                        result = num1 / num2;
+                        break;
+                }
                 System.out.printf("result: %d\n", result);
             } catch (Exception e) {
                 System.out.println("error : " + e.getMessage());

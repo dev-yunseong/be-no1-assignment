@@ -1,4 +1,4 @@
-package calculator;
+package calculator.lv3;
 
 public enum OperatorType {
     ADD('+'), SUB('-'), MUL('*'), DIV('*');
